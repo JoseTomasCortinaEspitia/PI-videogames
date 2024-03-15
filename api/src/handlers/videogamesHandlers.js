@@ -38,9 +38,9 @@ const getVideogameByIdHandler = async (req, res) => {
 
 //por body
 const createVideogameHandler = async (req, res) => {
-    const { name, description, released, rating, platforms, image, createdInDb } = req.body
+    const { name, description, released, rating, platforms, image, createdInDb, genreId } = req.body
     try {
-        const response = await createVideogamesController(name, description, released, rating, platforms, image, createdInDb)
+        const response = await createVideogamesController(name, description, released, rating, platforms, image, createdInDb, genreId)
         res.status(200).json(response)
     } catch (error) {
         res.status(400).json({ error: error.message })
