@@ -1,0 +1,4 @@
+.contenedorHome{
+    display: flex;
+    flex-direction: column;
+}
