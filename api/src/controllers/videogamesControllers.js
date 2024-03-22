@@ -14,12 +14,34 @@ const { infoAPICleaned, infoByIdAPICleaned } = require('../utils/index');
 
 //console.log(process.env.API_KEY)
 
-
+//Controlador para obtener todos los videojuegos 100 de la API y los de la BD
 const getVideogamesController = async () => {
     
-    //obtener los videojuegos de la api
-    const responseAPI = (await axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)).data
-    const responseAPICleaned = infoAPICleaned(responseAPI)
+    //obtener las variables de entorno
+    const API_KEY = process.env.API_KEY;
+    const totalPages = 5; // Número total de páginas a obtener
+    const videoGamesPerPage = 20; // Número de videojuegos por página
+
+    //Array para almacenar los videojuegos de todas las páginas
+    let responseAPICleaned = [];
+
+
+    //iterrar sobre cada página
+    for (let page = 1; page <= totalPages; page++) {
+        const response = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`)).data
+        const videogames = response.results;
+        
+        // Limpiar la información de los videojuegos obtenidos
+        const cleanedVideogames = videogames.map(videogame => infoAPICleaned(videogame));
+
+        // Agregar los videojuegos limpios de la página actual al array
+        responseAPICleaned = responseAPICleaned.concat(cleanedVideogames);
+
+        // Si ya hemos alcanzado el número deseado de videojuegos, salir del bucle
+        if (responseAPICleaned.length >= totalPages * videoGamesPerPage) {
+            break;
+        }
+    }
     
     //obtener los videojuegos de la db
     const responseDB = await Videogame.findAll()
@@ -27,11 +49,41 @@ const getVideogamesController = async () => {
     return responseAPICleaned.concat(responseDB)
 }
 
+
+
+
+
 //por query
+//controlador para obtener los videojuegos por nombre
 const getVideogamesByNameController = async (name) => {
-    //obtener los videojuegos de la api
-    const responseAPI = (await axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)).data
-    const responseAPICleaned = infoAPICleaned(responseAPI)
+    
+    //obtener las variables de entorno
+    const API_KEY = process.env.API_KEY;
+    const totalPages = 5; // Número total de páginas a obtener
+    const videoGamesPerPage = 20; // Número de videojuegos por página
+
+    //Array para almacenar los videojuegos de todas las páginas
+    let responseAPICleaned = [];
+
+
+    //iterrar sobre cada página
+    for (let page = 1; page <= totalPages; page++) {
+        const response = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`)).data
+        const videogames = response.results;
+        
+        // Limpiar la información de los videojuegos obtenidos
+        const cleanedVideogames = videogames.map(videogame => infoAPICleaned(videogame));
+
+        // Agregar los videojuegos limpios de la página actual al array
+        responseAPICleaned = responseAPICleaned.concat(cleanedVideogames);
+
+        // Si ya hemos alcanzado el número deseado de videojuegos, salir del bucle
+        if (responseAPICleaned.length >= totalPages * videoGamesPerPage) {
+            break;
+        }
+    }
+
+    //filtra los videojuegos para encontrar el que coincida con el nombre recibido por query
     const videogameByNameAPI = responseAPICleaned.filter((videogame) => videogame.name.toLowerCase().includes(name.toLowerCase()))
     
     //obtener los videojuegos de la db
@@ -76,6 +128,7 @@ const getVideogamesByIdController = async (id, source) => {
     } else {
 
         videogameById = (await axios.get(`https://api.rawg.io/api/games/${id}?key=${process.env.API_KEY}`)).data;
+        
         const responseByIdAPICleaned = infoByIdAPICleaned(videogameById)
         
         return responseByIdAPICleaned

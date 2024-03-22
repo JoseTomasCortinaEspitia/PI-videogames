@@ -1,11 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 //importo los estilos
 import styles from './navbar.module.css'
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    const { handleSearch, handleSubmit } = props
 
     return (
         <div className={styles.navbar}>
-            <form  action="" className={styles.form1}>
+            <form onChange={handleSearch} action="" className={styles.form1}>
                 <div className={styles.group}>
                     <input required type="text" className={styles.input} />
                     <span className={styles.highlight}></span>
@@ -13,7 +17,7 @@ const Navbar = () => {
                     <label>Tu Videogame</label>
                 </div>
                 <div>
-                    <button  className={styles.cssbuttonsIo}>
+                    <button onClick={handleSubmit} className={styles.cssbuttonsIo}>
                         <span>
                             Buscar
                         </span>

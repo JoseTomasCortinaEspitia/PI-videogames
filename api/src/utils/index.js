@@ -1,22 +1,22 @@
-const infoAPICleaned = (infoApi) => infoApi.results.map((game) => {
+const infoAPICleaned = (infoApi) =>  {
     return {
-        id: game.id,
-        name: game.name,
-        description: game.description,
-        released: game.released,
-        rating: game.rating,
-        platforms: game.platforms.map((platform) => platform.platform.name),
-        genres: game.genres.map((genre) => genre.name),
-        image: game.background_image,
+        id: infoApi.id,
+        name: infoApi.name,
+        description: infoApi.description_raw,
+        released: infoApi.released,
+        rating: infoApi.rating,
+        platforms: infoApi.platforms.map((platform) => platform.platform.name),
+        genres: infoApi.genres.map((genre) => genre.name),
+        image: infoApi.background_image,
         createdInDb: false
     }
-})
+}
 
 const infoByIdAPICleaned = (infoApi) => {
     return {
         id: infoApi.id,
         name: infoApi.name,
-        description: infoApi.description,
+        description: infoApi.description_raw,
         released: infoApi.released,
         rating: infoApi.rating,
         platforms: infoApi.platforms.map((platform) => platform.platform.name),
