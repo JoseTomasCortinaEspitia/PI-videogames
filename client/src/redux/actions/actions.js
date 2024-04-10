@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID } from './types'
+import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID, CLEAR_DETAIL } from './types'
 
-//Función que hace la peticion con axios a la base de datos
+//Función que hace la peticion con axios al back-end
 //para traer todos los perros
 export const getVideogames = () => {
     return async function(dispatch){
@@ -13,7 +13,7 @@ export const getVideogames = () => {
     }
 }
 
-//Función que hace la peticion con axios a la base de datos
+//Función que hace la peticion con axios al back-end
 //para traer un perro por nombre
 export const getVideogamesByName = (name) => {
     return async function(dispatch){
@@ -25,7 +25,7 @@ export const getVideogamesByName = (name) => {
     }
 }
 
-//Función que hace la peticion con axios a la base de datos
+//Función que hace la peticion con axios al back-end
 //para traer un perro por ID
 export const getVideogameById = (id) => {
     return async function(dispatch){
@@ -36,3 +36,11 @@ export const getVideogameById = (id) => {
         })
     }
 }
+
+//Función para desmontar mi componente
+export const clearDetail = () => {
+    return {
+        type: CLEAR_DETAIL
+    }
+}
+

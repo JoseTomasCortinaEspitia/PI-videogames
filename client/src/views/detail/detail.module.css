@@ -5,7 +5,7 @@
   align-items: center;
   width: auto;
   height: auto;
-  padding: 0px 10px 0px 10px;
+  padding: 15px 10px 10px 10px;
 }
 
 
@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 1180px;
+  width: 1170px;
   height: 630px;
   background: #171717;
   padding: 12px;

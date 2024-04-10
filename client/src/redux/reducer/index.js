@@ -1,8 +1,7 @@
-import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID } from '../actions/types'
+import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID, CLEAR_DETAIL } from '../actions/types'
 
 const initialState = {
-    allVideogames: [],
-    allVideogamesCopy: [],
+    allVideogames: [],//estado original con todos los videojuegos
     videogame: []
 }
 
@@ -12,7 +11,6 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allVideogames: action.payload,
-                allVideogamesCopy: action.payload
             };
         case GET_VIDEOGAMES_BY_NAME:
             return {
@@ -23,6 +21,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 videogame: action.payload
+            };
+        case CLEAR_DETAIL:
+            return {
+                ...state,
+                videogame: []
             };
         default:
             return {

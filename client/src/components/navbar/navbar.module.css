@@ -118,9 +118,9 @@
 
 /* css para el boton */
 .cssbuttonsIo {
-  height: 70px;
+  height: 60px;
   margin: 10px 0px 0px 0px;
-  width: 220px;
+  width: 200px;
   background: #333;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -158,4 +158,12 @@
     color: #d6d6d6;
     -webkit-transition: 100ms;
     transition: 100ms;
+  }
+
+  .groupButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }

@@ -1,10 +1,10 @@
 //Requiero las variables de entorno
 require('dotenv').config();
+const API_KEY = process.env.API_KEY;
 
 //Requiero las librerías o dependencias
 const axios = require("axios")
 const { Op } = require('sequelize');
-
 
 //Requiero los modelos
 const { Videogame, Genre } = require('../db');
@@ -12,19 +12,15 @@ const { Videogame, Genre } = require('../db');
 //Requiero las funciones de utils
 const { infoAPICleaned, infoByIdAPICleaned } = require('../utils/index');
 
-//console.log(process.env.API_KEY)
 
 //Controlador para obtener todos los videojuegos 100 de la API y los de la BD
 const getVideogamesController = async () => {
     
-    //obtener las variables de entorno
-    const API_KEY = process.env.API_KEY;
     const totalPages = 5; // Número total de páginas a obtener
     const videoGamesPerPage = 20; // Número de videojuegos por página
 
     //Array para almacenar los videojuegos de todas las páginas
     let responseAPICleaned = [];
-
 
     //iterrar sobre cada página
     for (let page = 1; page <= totalPages; page++) {
@@ -42,7 +38,7 @@ const getVideogamesController = async () => {
             break;
         }
     }
-    
+  
     //obtener los videojuegos de la db
     const responseDB = await Videogame.findAll()
 
@@ -57,14 +53,11 @@ const getVideogamesController = async () => {
 //controlador para obtener los videojuegos por nombre
 const getVideogamesByNameController = async (name) => {
     
-    //obtener las variables de entorno
-    const API_KEY = process.env.API_KEY;
     const totalPages = 5; // Número total de páginas a obtener
     const videoGamesPerPage = 20; // Número de videojuegos por página
 
     //Array para almacenar los videojuegos de todas las páginas
     let responseAPICleaned = [];
-
 
     //iterrar sobre cada página
     for (let page = 1; page <= totalPages; page++) {
@@ -108,6 +101,10 @@ const getVideogamesByNameController = async (name) => {
     return combinedResults;
 }
 
+
+
+
+//controlador para obtener los videojuegos por id y mostrar sus detalles
 //por params
 const getVideogamesByIdController = async (id, source) => {
     
@@ -135,6 +132,10 @@ const getVideogamesByIdController = async (id, source) => {
     }
 }
 
+
+
+
+//controlador para crear un nuevo videojuego
 //por body
 const createVideogamesController = async (name, 
     description, 

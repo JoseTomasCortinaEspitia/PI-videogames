@@ -16,12 +16,13 @@ const Navbar = (props) => {
                     <span className={styles.bar}></span>
                     <label>Tu Videogame</label>
                 </div>
-                <div>
+                <div className={styles.groupButton}>
                     <button onClick={handleSubmit} className={styles.cssbuttonsIo}>
                         <span>
                             Buscar
                         </span>
                     </button>
+                    <button className={styles.cssbuttonsIo}><a href="/form">Crear Videogame</a></button>
                 </div>
             </form>
         </div>

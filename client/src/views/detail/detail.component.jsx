@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 //importo las actions
-import { getVideogameById } from "../../redux/actions/actions"
+import { getVideogameById, clearDetail } from "../../redux/actions/actions"
 
 //importo los estilos
 import styles from "./detail.module.css"
@@ -19,13 +19,15 @@ const Detail = () => {
 
     useEffect(() => {
         dispatch(getVideogameById(id))
+        return () => {
+            dispatch(clearDetail())
+        }
     }, [dispatch, id])
 
     //console.log(dog)
 
     return (
         <div className={styles.body1}>
-            <button><a href="/home">Volver</a></button>
             <div className={styles.card}>
                 <div className={styles.content}>
                     <div className={styles.content1}>
@@ -50,6 +52,7 @@ const Detail = () => {
                         <p>{videogame.description}</p> 
                     </div>
                 </div>
+            <button><a href="/home">Volver</a></button>
             </div>
         </div >
     )
