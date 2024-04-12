@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID, CLEAR_DETAIL } from './types'
+import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID, CLEAR_DETAIL, NOT_GET_VIDEOGAME_BY_NAME } from './types'
 
 //Función que hace la peticion con axios al back-end
 //para traer todos los perros
@@ -18,10 +18,18 @@ export const getVideogames = () => {
 export const getVideogamesByName = (name) => {
     return async function(dispatch){
         const response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
-        return dispatch({
-            type: GET_VIDEOGAMES_BY_NAME,
-            payload: response.data
-        })
+        //console.log(response.data)
+        if (Array.isArray(response.data)) {
+            return dispatch({
+                type: GET_VIDEOGAMES_BY_NAME,
+                payload: response.data
+            })  
+        } else{
+            return dispatch({
+                type: NOT_GET_VIDEOGAME_BY_NAME,
+                payload: response.data
+            })
+        }
     }
 }
 

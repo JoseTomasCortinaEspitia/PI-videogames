@@ -17,7 +17,8 @@ const Home = () => {
     const dispatch = useDispatch();
     //useSelector me permite acceder al state global de mi store, aca se suscriben los componentes al estado global
     const allVideogames = useSelector((state) => state.allVideogames);//
-    
+    const error = useSelector((state) => state.error);
+
     //Filtrar por nombre con el back-end
     const [search, setSearch] = useState('');
 
@@ -31,7 +32,8 @@ const Home = () => {
     useEffect(() => {
         setFilteredVideogames(allVideogames);
     }, [allVideogames]);
-
+    
+    
     function handleSearch(e) {
         e.preventDefault();
         setSearch(e.target.value);
@@ -96,8 +98,8 @@ const Home = () => {
                 <button onClick={() => handleFilterByGenre('RPG')}>RPG</button>
                 <button onClick={() => handleFilterByGenre('Puzzle')}>Puzzle</button>
                 <button onClick={() => handleFilterByGenre('Adventure')}>Adventure</button>
-                <button onClick={() => handleFilterByGenre('MMORPG')}>Massively Multiplayer</button>
-                <button onClick={() => handleFilterByGenre('Sport')}>Sport</button>
+                <button onClick={() => handleFilterByGenre('Massively Multiplayer')}>Massively Multiplayer</button>
+                <button onClick={() => handleFilterByGenre('Sports')}>Sports</button>
                 <button onClick={() => handleFilterByGenre('Racing')}>Racing</button>
                 <button onClick={() => handleFilterByGenre('Indie')}>Indie</button>
                 <button onClick={() => handleFilterByGenre('Platformer')}>Platformer</button>
@@ -120,6 +122,7 @@ const Home = () => {
                 <button onClick={() => handleSortByRating('desc')}>Ordenar por rating de mayor a menor</button>
             </div>
             <button onClick={handleReset}>Limpiar</button>
+            {error && <p>{error}</p>}
             <Cards allVideogames={filteredVideogames}/>
         </div>
     )

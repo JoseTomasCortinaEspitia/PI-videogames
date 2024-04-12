@@ -53,8 +53,8 @@ const getVideogamesController = async () => {
 //controlador para obtener los videojuegos por nombre
 const getVideogamesByNameController = async (name) => {
     
-    const totalPages = 5; // Número total de páginas a obtener
-    const videoGamesPerPage = 20; // Número de videojuegos por página
+    const totalPages = 5; // Número total de páginas a obtener de la API
+    const videoGamesPerPage = 20; // Número de videojuegos por página de la API
 
     //Array para almacenar los videojuegos de todas las páginas
     let responseAPICleaned = [];

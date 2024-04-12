@@ -1,7 +1,7 @@
 .card {
     position: relative;
     width: 260px;
-    height: 350px;
+    height: 400px;
     background: #171717;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     left: -5px;
     margin: auto;
     width: 260px;
-    height: 344px;
+    height: 360px;
     border-radius: 10px;
     background: linear-gradient(-45deg, #F4538A 0%, #59D5E0 100% );
     z-index: -10;

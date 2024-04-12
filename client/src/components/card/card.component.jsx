@@ -8,6 +8,8 @@ import styles from './card.module.css'
 const Card = (props) => {
     //console.log(props)
     const {videogame} = props
+
+
     return (
         <div>
             <Link to={`/home/${videogame.id}`} className={styles.link}>
