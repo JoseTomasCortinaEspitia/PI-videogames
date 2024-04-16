@@ -132,3 +132,48 @@
   flex-direction: column;
   
 }
+
+/* Agregar estilos para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  /* Estilos para la tarjeta */
+  .card {
+    width: 90%;
+    max-width: 90%; /* Reducir el ancho máximo para adaptarse a pantallas más pequeñas */
+    height: auto;
+    padding: 8px; /* Reducir el relleno */
+    gap: 8px; /* Reducir el espacio entre elementos hijos */
+  }
+
+  /* Estilos para el contenido */
+  .content {
+    padding: 12px; /* Aumentar el relleno */
+  }
+
+  /* Estilos para el precio */
+  .content .price {
+    font-size: 3.5vw; /* Reducir el tamaño de fuente en pantallas pequeñas */
+  }
+
+  /* Estilos para la descripción */
+  .content .description {
+    font-size: 2vw; /* Reducir el tamaño de fuente en pantallas pequeñas */
+  }
+
+  /* Estilos para el título */
+  .content .title {
+    font-size: 2.5vw; /* Reducir el tamaño de fuente en pantallas pequeñas */
+  }
+
+  /* Estilos para la imagen */
+  .content .imagen {
+    width: 90%; /* Reducir el ancho para adaptarse a pantallas más pequeñas */
+    max-width: 90%;
+    height: auto;
+  }
+
+  /* Estilos para el contenedor de contenido */
+  .content1 {
+    flex-direction: column; /* Cambiar la dirección del flexbox a columna en pantallas pequeñas */
+    gap: 20px; /* Aumentar el espacio entre elementos */
+  }
+}

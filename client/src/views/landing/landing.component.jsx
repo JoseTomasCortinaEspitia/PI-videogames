@@ -14,7 +14,6 @@ const Landing = () => {
                         <li><ScrollLink to="inicio" smooth={true} duration={500}>Inicio</ScrollLink></li>
                         <li><ScrollLink to="quienes" smooth={true} duration={500}>Quienes Somos</ScrollLink></li>
                         <li><ScrollLink to="servicios" smooth={true} duration={500}>Servicios</ScrollLink></li>
-                        <li><ScrollLink to="contacto" smooth={true} duration={500}>Contacto</ScrollLink></li>
                     </ul>
                 </nav>
             </div>
@@ -75,44 +74,6 @@ const Landing = () => {
                     <RouterLink to="/home">
                         <button className={styles.button1}>¡Hazlo Tuyo Ahora!</button>
                     </RouterLink>
-                </div>
-            </Element>
-            <Element name="contacto">
-                <div className={styles.contenedor4}>
-                    <div className={styles.contacto}> 
-                        <h1>Contacto</h1>
-                    </div>
-                    <div>
-                        <div className={styles.formcontenedor}>
-                            <form className={styles.form} action="">
-                                <div className={styles.formpack}>
-                                    {/* <label className={styles.label1} htmlFor="name">Nombre: </label> */}
-                                    <input className={styles.input} type="text" placeholder="Nombre"/>
-                                </div>
-                                
-                                <div className={styles.formpack}>
-                                    {/* <label className={styles.label1} htmlFor="telefono">Telefono: </label> */}
-                                    <input className={styles.input} type="tel" placeholder="Telefono"/>
-                                </div>
-                                <div className={styles.formpack}>
-                                    {/* <label className={styles.label1} htmlFor="dirección">Dirección: </label> */}
-                                    <input className={styles.input} type="text" placeholder="Dirección"/>
-                                </div>
-                                <div className={styles.formpack}>
-                                    {/* <label className={styles.label1} htmlFor="email">Email: </label> */}
-                                    <input className={styles.input} type="email" placeholder="Email"/>
-                                </div>
-                                <div className={styles.formpack}>
-                                    {/* <label className={styles.label1} htmlFor="comentario">Comentarios: </label> */}
-                                    <input className={styles.input} type="text" placeholder="Comentarios"/>
-                                </div>
-                                <button className={styles.btn}>¡Enviar!</button>
-                            </form>
-                            <div >
-                                <img src="/videogame-contacto.png" alt="" className={styles.imagen2}/>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </Element>
         </div>

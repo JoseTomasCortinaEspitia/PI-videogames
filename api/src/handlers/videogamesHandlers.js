@@ -39,6 +39,12 @@ const getVideogameByIdHandler = async (req, res) => {
 //por body
 const createVideogameHandler = async (req, res) => {
     const { name, description, released, rating, platforms, image, createdInDb, genreId } = req.body
+
+    // Verificar si falta algún dato requerido
+    if (!name || !description || !released || !rating || !platforms || !image || !createdInDb || !genreId) {
+        return res.status(400).json({ error: 'Falta uno o más datos requeridos' });
+    }
+    
     try {
         //validar si no hay una de las propiedades que retorne un error diciendo que hace falta el dato
         const response = await createVideogamesController(name, description, released, rating, platforms, image, createdInDb, genreId)
