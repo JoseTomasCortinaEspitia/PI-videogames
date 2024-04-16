@@ -33,6 +33,7 @@ module.exports = (sequelize) => {
     },
     createdInDb: {
       type: DataTypes.STRING,
+      defaultValue: true,
       allowNull: false,
     }
   }, {

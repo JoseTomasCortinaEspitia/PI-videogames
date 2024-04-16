@@ -30,8 +30,8 @@ const genresAPICleaned = (infoApi) => infoApi.map((genre) => {
     return {
         id: genre.id,
         name: genre.name,
-        image: genre.image_background,
-        games: genre.games.map((game) => game.name),
+        // image: genre.image_background,
+        // games: genre.games.map((game) => game.name),
         createdInDb: false
     }
 })

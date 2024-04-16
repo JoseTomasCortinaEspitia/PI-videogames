@@ -40,6 +40,7 @@ const getVideogameByIdHandler = async (req, res) => {
 const createVideogameHandler = async (req, res) => {
     const { name, description, released, rating, platforms, image, createdInDb, genreId } = req.body
     try {
+        //validar si no hay una de las propiedades que retorne un error diciendo que hace falta el dato
         const response = await createVideogamesController(name, description, released, rating, platforms, image, createdInDb, genreId)
         res.status(200).json(response)
     } catch (error) {

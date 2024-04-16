@@ -33,9 +33,12 @@ const Cards = ({ allVideogames }) => {
     return (
         <div>
             <div className={styles.contenedorCards}>
-                {currentVideogames.map((videogame) => (
-                    <Card key={videogame.id} videogame={videogame} />
-                ))}
+            {currentVideogames.map((videogame) => {
+                    //console.log(videogame);
+                    return (
+                        <Card key={videogame.id} videogame={videogame} />
+                    );
+                })}
             </div>
             <div className={styles.paginado}>
                 <div>

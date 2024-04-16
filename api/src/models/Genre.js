@@ -12,14 +12,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    games: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-    },
+    // image: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
+    // games: {
+    //   type: DataTypes.ARRAY(DataTypes.STRING),
+    //   allowNull: false,
+    // },
     createdInDb: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

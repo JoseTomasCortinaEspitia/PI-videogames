@@ -45,7 +45,7 @@ const Home = () => {
     }
 
     const handleFilterByGenre = (genre) => {
-        const filtered = allVideogames.filter(game => game.genres.includes(genre));
+        const filtered = allVideogames.filter(game => game.genres && game.genres.includes(genre));
         setFilteredVideogames(filtered);
     }
 

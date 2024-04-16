@@ -11,9 +11,24 @@ const getGenres = async () => {
     // Obtener los géneros de la API
     const infoAPI = (await axios.get(`https://api.rawg.io/api/genres?key=${process.env.API_KEY}`)).data.results;
     
+    // const responseAPI = async () => {
+    //     const genres = await axios.get(`https://api.rawg.io/api/genres?key=${process.env.API_KEY}`);
+    //     const genresResults = genres.data.results;
+    //     const genresResultsArray = genresResults.map((genre) => (genre.name));
+    //     return genresResultsArray;
+    // }
+
     // Limpiar los datos de la API
     const responseAPI = genresAPICleaned(infoAPI);
     
+    console.log(responseAPI);
+    // const infoAPI = responseAPI();
+    // console.log(infoAPI);
+    // infoAPI.forEach(async (genre) => {
+    //     if (!await Genre.findOne({where: {name: genre}}))
+    //     await Genre.create({name: genre});
+    // });
+
     // Verificar si los géneros ya existen en la base de datos
     const existingGenres = await Genre.findAll({ where: { id: responseAPI.map(genre => genre.id) } });
     

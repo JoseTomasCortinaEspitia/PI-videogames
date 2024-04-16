@@ -1,5 +1,6 @@
 //Importo las dependencias o librerias
 import { useState } from 'react';
+import axios from 'axios';
 
 //importo los estilos
 import styles from './form.module.css';
@@ -17,7 +18,36 @@ const Form = () => {
         genreId: "",
     });
 
-    
+    //Agrega un estado para controlar si el formulario se envió correctamente:
+    const [formSubmittedSuccessfully, setFormSubmittedSuccessfully] = useState(false);
+
+    // Función para manejar el envío del formulario
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        //console.log(videogame);
+        try {
+            // Enviar una solicitud POST al backend con los datos del formulario
+            await axios.post('http://localhost:3001/videogames', videogame);
+            
+            // Limpiar el formulario después de enviar los datos
+            setVideogame({
+                name: "",
+                image: "",
+                description: "",
+                platforms: [],
+                released: "",
+                rating: "",
+                genreId: "",
+            });
+
+            // Redirigir al usuario a la página de inicio u otra página
+            // (opcional, dependiendo de tu aplicación)
+            setFormSubmittedSuccessfully(true);
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error);
+        }
+    };
+
     
     //funciones validadoras
 
@@ -57,14 +87,8 @@ const Form = () => {
                 ...errorImage,
                 image: "El campo no puede estar vacio"
             })
-        }
-            
-        if (videogame.image.length > 35) {
-            return setErrorImage({
-                ...errorImage,
-                image: "Debe tener menos de 35 caracteres"
-            })   
-        } else {
+        }    
+        else {
             return setErrorImage({...errorImage, image: ""})
         }
     }
@@ -84,10 +108,10 @@ const Form = () => {
             return
         }
         setErrorDescription({...errorDescription, description: ""})
-        if (videogame.description.length > 35) {
+        if (videogame.description.length > 350) {
             setErrorDescription({
                 ...errorDescription,
-                description: "Debe tener menos de 35 caracteres"
+                description: "Debe tener menos de 350 caracteres"
             })
             return
         }
@@ -169,9 +193,12 @@ const Form = () => {
 
     const handleChange = (event) => {
         const {name, value} = event.target
+        // Si el nombre es 'platforms', convierte la cadena de texto en un array
+        const newValue = name === 'platforms' ? value.split(',').map(platform => platform.trim()) : value;
+
         setVideogame({
             ...videogame,
-            [name]: value,
+            [name]: newValue,
         })
     
         validateName({
@@ -207,7 +234,7 @@ const Form = () => {
 
     return (
         <div className={styles.formContainer}>
-            <form className={styles.form} onSubmit={""}>
+            <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
                     <p>Nombre</p>
                     <input 
@@ -271,6 +298,9 @@ const Form = () => {
                     />
                     {/* {error.genreId ? (<p>{error.genreId}</p>) : (<p>Genero ingresado correctamente!</p>)} */}
                 </div>
+                {formSubmittedSuccessfully && (
+                    <p>Tu videojuego ha sido creado exitosamente.</p>
+                )}
                 {errorName.name || 
                 errorImage.image || 
                 errorDescription.description ||

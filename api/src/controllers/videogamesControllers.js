@@ -42,7 +42,7 @@ const getVideogamesController = async () => {
     //obtener los videojuegos de la db
     const responseDB = await Videogame.findAll()
 
-    return responseAPICleaned.concat(responseDB)
+    return responseDB.concat(responseAPICleaned)
 }
 
 

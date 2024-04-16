@@ -2,7 +2,7 @@ import axios from 'axios'
 import { GET_VIDEOGAMES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_BY_ID, CLEAR_DETAIL, NOT_GET_VIDEOGAME_BY_NAME } from './types'
 
 //Función que hace la peticion con axios al back-end
-//para traer todos los perros
+//para traer todos los videojuegos
 export const getVideogames = () => {
     return async function(dispatch){
         const response = await axios.get('http://localhost:3001/videogames')
@@ -14,7 +14,7 @@ export const getVideogames = () => {
 }
 
 //Función que hace la peticion con axios al back-end
-//para traer un perro por nombre
+//para traer un videojuego por nombre
 export const getVideogamesByName = (name) => {
     return async function(dispatch){
         const response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
@@ -34,7 +34,7 @@ export const getVideogamesByName = (name) => {
 }
 
 //Función que hace la peticion con axios al back-end
-//para traer un perro por ID
+//para traer un videojuego por ID
 export const getVideogameById = (id) => {
     return async function(dispatch){
         const response = await axios.get(`http://localhost:3001/videogames/${id}`)
