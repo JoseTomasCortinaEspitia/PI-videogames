@@ -39,10 +39,27 @@ const getVideogamesController = async () => {
         }
     }
   
-    //obtener los videojuegos de la db
-    const responseDB = await Videogame.findAll()
+    // Obtener los videojuegos de la base de datos
+    const responseDB = await Videogame.findAll({
+        include: Genre // Esto asume que has definido las relaciones adecuadas en tus modelos
+    });
 
-    return responseDB.concat(responseAPICleaned)
+    // Formatear los datos de la base de datos para que tengan una estructura similar a los de la API
+    const responseDBFormatted = responseDB.map(videogame => {
+        return {
+            id: videogame.id,
+            name: videogame.name,
+            image: videogame.image,
+            genres: videogame.genres.map(genre => genre.name), //solo me interesa el nombre
+            createdInDb: videogame.createdInDb,
+            rating: videogame.rating
+        };
+    });
+
+    // Combinar los datos de la API y de la base de datos
+    const combinedData = responseDBFormatted.concat(responseAPICleaned);
+
+    return combinedData;
 }
 
 
@@ -137,7 +154,8 @@ const getVideogamesByIdController = async (id, source) => {
 
 //controlador para crear un nuevo videojuego
 //por body
-const createVideogamesController = async (name, 
+const createVideogamesController = async (
+    name, 
     description, 
     released, 
     rating, 
@@ -145,6 +163,8 @@ const createVideogamesController = async (name,
     image, 
     createdInDb, 
     genreId) => {
+
+    //console.log(name, description, released, rating, platforms, image, createdInDb, genreId)
     
     const newVideogame = await Videogame.create({ name, 
         description, 
@@ -152,7 +172,8 @@ const createVideogamesController = async (name,
         rating, 
         platforms, 
         image, 
-        createdInDb,  
+        createdInDb,
+        genreId 
     });
 
     //await newVideogame.reload();

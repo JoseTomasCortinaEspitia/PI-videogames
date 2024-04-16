@@ -12,10 +12,10 @@ const Form = () => {
         name: "",
         image: "",
         description: "",
-        platforms: "",
+        platforms: [],
         released: "",
         rating: "",
-        genreId: "",
+        genreId: [],
     });
 
     //Agrega un estado para controlar si el formulario se envió correctamente:
@@ -25,7 +25,30 @@ const Form = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         //console.log(videogame);
+
+        // Validar todos los campos antes de enviar el formulario
+        validateName(videogame);
+        validateImage(videogame);
+        validateDescription(videogame);
+        validatePlatforms(videogame);
+        validateReleased(videogame);
+        validateRating(videogame);
+
+        // Verificar si hay errores en algún campo
+        if (
+            errorName.name ||
+            errorImage.image ||
+            errorDescription.description ||
+            errorPlatforms.platforms ||
+            errorReleased.released ||
+            errorRating.rating
+        ) {
+            console.error('Error al enviar el formulario: Campos incompletos o incorrectos');
+            return;
+        }
+
         try {
+            console.log(videogame);
             // Enviar una solicitud POST al backend con los datos del formulario
             await axios.post('http://localhost:3001/videogames', videogame);
             
@@ -37,7 +60,7 @@ const Form = () => {
                 platforms: [],
                 released: "",
                 rating: "",
-                genreId: "",
+                genreId: [],
             });
 
             // Redirigir al usuario a la página de inicio u otra página
@@ -193,8 +216,9 @@ const Form = () => {
 
     const handleChange = (event) => {
         const {name, value} = event.target
-        // Si el nombre es 'platforms', convierte la cadena de texto en un array
-        const newValue = name === 'platforms' ? value.split(',').map(platform => platform.trim()) : value;
+        // Si el nombre es 'platforms' o 'genreId', convierte la cadena de texto en un array
+        const newValue = name === 'platforms' || name === 'genreId' ? value.split(',').map(item => item.trim()) : value;
+
 
         setVideogame({
             ...videogame,
@@ -306,6 +330,7 @@ const Form = () => {
                 errorDescription.description ||
                 errorReleased.released || 
                 errorRating.rating ||
+                
                 errorPlatforms.platforms ? null : <button className={styles.formSubmitBtn} type="submit">Crear!</button>}
                 
             </form>
