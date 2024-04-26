@@ -16,15 +16,12 @@ const Detail = () => {
     const dispatch = useDispatch()
     const videogame = useSelector((state) => state.videogame)
 
-
     useEffect(() => {
         dispatch(getVideogameById(id))
         return () => {
             dispatch(clearDetail())
         }
     }, [dispatch, id])
-
-    //console.log(dog)
 
     return (
         <div className={styles.body1}>
@@ -36,25 +33,27 @@ const Detail = () => {
                         </div>
                         <div>
                             <h2 className={styles.title}>{videogame.name}</h2>
-                            <p>{videogame.released}</p> 
+                            <p>{videogame.released}</p>
                             <StarRatings
                                 rating={videogame.rating}
                                 starRatedColor="#f8e825"
                                 numberOfStars={5}
                                 starDimension="20px"
                                 starSpacing="2px"
-                            /> 
-                            <p>Plataformas: {videogame.platforms ? videogame.platforms.join(", "): ""}</p> 
-                            <p>Genero: {videogame.genres ? videogame.genres.join(", ") : ""}</p>
+                            />
+                            <p>Plataformas: {videogame.platforms ? videogame.platforms.join(", ") : ""}</p>
+                            <div className={styles.content2}>
+                                {typeof videogame.description === 'string' ? (
+                                    <p>{videogame.description}</p>
+                                ) : null}
+                                <p>Genero: {videogame.genres ? videogame.genres.map(genre => genre.name).join(", ") : ""}</p>
+                            </div>
                         </div>
                     </div>
-                    <div className={styles.content2}>
-                        <p>{videogame.description}</p> 
-                    </div>
                 </div>
-            <button><a href="/home">Volver</a></button>
+                <button><a href="/home">Volver</a></button>
             </div>
-        </div >
+        </div>
     )
 }
 

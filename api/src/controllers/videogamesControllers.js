@@ -176,6 +176,7 @@ const createVideogamesController = async (
         genreId 
     });
 
+    //
     //await newVideogame.reload();
 
     await newVideogame.addGenre(genreId)// agrego el genero, hago la asociacion de los modelos
